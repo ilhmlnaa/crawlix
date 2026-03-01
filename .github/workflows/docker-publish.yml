@@ -51,7 +51,6 @@ jobs:
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image
-        if: github.ref != 'refs/heads/main'
         id: build-and-push
         uses: docker/build-push-action@v5
         with:
