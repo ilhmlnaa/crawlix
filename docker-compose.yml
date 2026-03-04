@@ -11,6 +11,10 @@ services:
       - CACHE_ENABLED=true
       - SCRAPER_DEFAULT_STRATEGY=cloudscraper
       - PLAYWRIGHT_HEADLESS=true
+      # SigNoz / OpenTelemetry — fill in your values
+      - OTEL_SERVICE_NAME=crawlix
+      - OTEL_EXPORTER_OTLP_ENDPOINT=https://ingest.us.signoz.cloud:443
+      - OTEL_EXPORTER_OTLP_HEADERS=signoz-ingestion-key=<your-ingestion-key>
     depends_on:
       - redis
     restart: unless-stopped

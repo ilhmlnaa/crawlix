@@ -1,4 +1,5 @@
 import winston from "winston";
+import { OpenTelemetryTransportV3 } from "@opentelemetry/winston-transport";
 import { config } from "../config";
 
 const logFormat = winston.format.combine(
@@ -28,6 +29,10 @@ export const logger = winston.createLogger({
     new winston.transports.Console({
       format: consoleFormat,
     }),
+    // Sends logs to SigNoz via OpenTelemetry (active when OTEL_ENABLED=true)
+    ...(process.env.OTEL_ENABLED === "true"
+      ? [new OpenTelemetryTransportV3()]
+      : []),
   ],
 });
 

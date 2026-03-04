@@ -42,6 +42,11 @@ RUN mkdir -p logs
 ARG PORT
 ENV PORT=${PORT}
 
+# OpenTelemetry / SigNoz — override at runtime via docker-compose or env file
+ENV OTEL_SERVICE_NAME="crawlix" \
+    OTEL_EXPORTER_OTLP_ENDPOINT="" \
+    OTEL_EXPORTER_OTLP_HEADERS=""
+
 EXPOSE ${PORT}
 
 HEALTHCHECK --interval=90s --timeout=10s --start-period=40s --retries=3 \
